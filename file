@@ -1,0 +1,64 @@
+import 'package:flutter/material.dart';
+void main()=> runApp(MyApp());
+class MyApp extends StatelessWidget{
+  const MyApp({super.key});
+  @override
+  Widget build(BuildContext context){
+    return MaterialApp(
+      home:Registration(),
+      debugShowCheckedModeBanner: false,
+    );
+  }
+}
+class Registration extends StatelessWidget{
+  Registration({super.key});
+  final _nameController = TextEditingController();
+  final _emailController = TextEditingController();
+  final _phoneController = TextEditingController();
+  final _passwordController =  TextEditingController();
+  @override
+  Widget build(BuildContext context){
+    return Scaffold(
+      appBar:AppBar(title:Text("User Registration Form")),
+      body:Padding(
+        padding: const EdgeInsets.all(160.0),
+        child:Column(
+          children:[
+            TextField(
+              controller:_nameController,
+              decoration:InputDecoration(labelText:"Name"),
+            ),
+            TextField(
+              controller:_emailController,
+              decoration:InputDecoration(labelText:"Email"),
+            ),
+            TextField(
+              controller:_phoneController,
+              decoration:InputDecoration(labelText:"Phone Number"),
+            ),
+            TextField(
+              controller : _passwordController,
+              decoration :InputDecoration(labelText:"Password"),
+              obscureText:true,
+            ),
+            const SizedBox(height:20),
+            ElevatedButton(
+              child:Text("Submit"),
+              onPressed:(){
+                final String name = _nameController.text;
+                final String email = _emailController.text;
+                final String phone = _phoneController.text;
+                final String password = _passwordController.text;
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content :Text("Registration Successful!\nName:$name\nEmail:$email\nPhone Number:$phone\nPassword:$password"),
+                  ),
+                );
+              }
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
